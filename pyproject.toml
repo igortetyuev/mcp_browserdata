@@ -6,6 +6,8 @@ build-backend = "hatchling.build"
 name = "mcp-browserdata"
 version = "0.1.0"
 description = "MCP server (stdio) for reading/writing/syncing cookies, passwords, bookmarks and site storage across installed browsers"
+readme = "README.md"
+license = "MIT"
 requires-python = ">=3.12"
 dependencies = [
     "fastmcp>=3.4,<4",

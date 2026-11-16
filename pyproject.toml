@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-browserdata"
+version = "0.1.0"
+description = "MCP server (stdio) for reading/writing/syncing cookies, passwords, bookmarks and site storage across installed browsers"
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp>=3.4,<4",
+    "websockets>=15",
+    "cryptography>=43",
+]
+
+[project.scripts]
+mcp-browserdata = "mcp_browserdata.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_browserdata"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.9",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not live'"
+markers = [
+    "live: tests that touch real browsers/CDP/keychain (deselect with '-m \"not live\"')",
+]
+
+[tool.pytest-asyncio]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF"]
